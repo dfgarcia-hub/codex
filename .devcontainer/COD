@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<title>Formulario de Mantenimiento y Activos Comerciales 🛠️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+/* --- 🎨 PALETA DE COLORES (Con fondo amarillo) --- */
+:root {
+--verde-355: #009639; /* Verde principal de marca */
+--rojo-185: #E03C31; /* Rojo para "Atrás" y Título Principal */
+--amarillo-1235: #FFB81C; /* Amarillo para "Buscar" y "Limpiar" */
+/* Colores de soporte para diseño limpio */
+--fondo-amarillo-108c: #FFF9E0; /* <<-- COLOR FONDO (Claro) */
+--white: #ffffff;
+--dark-text: #212529; /* Texto principal (casi negro) */
+--light-text: #555;
+--border-color: #ced4da; /* Borde sutil para inputs */
+--sombra-suave: rgba(0, 0, 0, 0.05); /* Sombra muy sutil para las tarjetas */
+--focus-row-bg: #f8f9fa; /* Gris muy claro para fila enfocada */
+--filled-row-bg: #e6fff0; /* Verde muy claro para fila llena */
+}
+
+/* --- ESTILOS GENERALES (Relajante y Moderno) --- */
+html,
+body {
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', Arial, sans-serif; /* Fuente limpia y profesional */
+font-size: 19px;
+background-color: var(--fondo-amarillo-108c); /* <<-- FONDO CAMBIADO */
+min-height: 100vh;
+}
+
+/* TÍTULO PRINCIPAL MODIFICADO */
+.form-title {
+font-family: 'Poppins', sans-serif;
+font-size: 34px;
+font-weight: 800;
+color: var(--rojo-185);
+margin-bottom: 25px;
+border-bottom: 2px solid #e0e0e0;
+padding-bottom: 18px;
+text-align: center;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+line-height: 1.3;
+text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* TÍTULOS DE SECCIÓN MODIFICADOS */
+h2 {
+color: var(--verde-355);
+font-size: 30px;
+margin: 10px 0 24px 0;
+text-align: center;
+font-weight: 600;
+}
+
+/* TARJETAS "PREMIUM" */
+.card {
+background: var(--white);
+padding: 32px 35px;
+border-radius: 16px;
+border: 1px solid #e9ecef;
+box-shadow: 0 8px 24px var(--sombra-suave);
+margin: 30px auto;
+max-width: 750px;
+width: 95%;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+position: relative;
+padding-bottom: 50px;
+}
+
+.card:hover {
+transform: translateY(-4px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Número de Sección */
+.section-number {
+position: absolute;
+bottom: 15px;
+right: 20px;
+font-size: 14px;
+color: #ccc;
+font-style: italic;
+}
+
+label {
+display: block;
+font-weight: 700;
+margin-top: 20px;
+font-size: 22px;
+color: var(--dark-text);
+}
+
+/* --- CONTROLES (Inputs, Selects) --- */
+input,
+select,
+textarea {
+width: 100%;
+padding: 18px;
+margin-top: 10px;
+border-radius: 10px;
+border: 2px solid var(--border-color);
+font-size: 19px;
+box-sizing: border-box;
+transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select option:disabled {
+color: #ccc;
+background-color: #f9f9f9;
+}
+
+/* Foco con el color de marca (verde) */
+input:focus,
+select:focus,
+textarea:focus {
+border-color: var(--verde-355);
+outline: none;
+box-shadow: 0 0 8px rgba(0, 150, 57, 0.3);
+}
+
+.actions {
+margin-top: 30px;
+display: flex;
+justify-content: space-between;
+gap: 15px;
+flex-wrap: wrap;
+}
+
+/* --- BOTONES (Profesionales y con marca) --- */
+button {
+font-size: 20px;
+font-weight: 600;
+padding: 18px 22px;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+flex: 1;
+min-width: 140px;
+transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Desactivar botón mientras se guarda */
+button:disabled {
+background-color: #ccc;
+color: #666;
+cursor: not-allowed;
+transform: none;
+box-shadow: none;
+}
+
+/* Color primario (verde) - Botones de Continuar/Siguiente/Finalizar */
+#btnContinuar1,
+#btnContinuar_moto,
+#btnContinuar_ubic,
+#btnContinuar_zona,
+#btnContinuar_cliente,
+#btnContinuar_equipo,
+#btnContinuar_diag,
+#btnContinuar_mantenimiento,
+#btnContinuar_alistamiento,
+#btnSiguiente_correctivo,
+#btnContinuar_freezer,
+#btnSiguiente_Sec12,
+#btnContinuar_Sec13,
+#btnSiguiente_descripcion,
+#btnContinuar_estado,
+#btnFinalizar_inventario,
+#btnSiguiente_inventario,
+#btnFinalizar_firma,
+#btnSiguiente_resumen
+{
+background: var(--verde-355);
+color: var(--white);
+}
+
+#btnContinuar1:hover,
+#btnContinuar_moto:hover,
+#btnContinuar_ubic:hover,
+#btnContinuar_zona:hover,
+#btnContinuar_cliente:hover,
+#btnContinuar_equipo:hover,
+#btnContinuar_diag:hover,
+#btnContinuar_mantenimiento:hover,
+#btnContinuar_alistamiento:hover,
+#btnSiguiente_correctivo:hover,
+#btnContinuar_freezer:hover,
+#btnSiguiente_Sec12:hover,
+#btnContinuar_Sec13:hover,
+#btnSiguiente_descripcion:hover,
+#btnContinuar_estado:hover,
+#btnFinalizar_inventario:hover,
+#btnSiguiente_inventario:hover,
+#btnFinalizar_firma:hover,
+#btnSiguiente_resumen:hover
+{
+background: #007f32;
+}
+
+/* Color secundario (rojo) */
+.btn-back {
+background: var(--rojo-185);
+color: var(--white);
+}
+
+.btn-back:hover {
+background: #b82f25;
+}
+
+/* Botón Limpiar Firma */
+#btnClearSignature {
+background: var(--amarillo-1235);
+color: var(--dark-text);
+flex-grow: 0.5;
+min-width: 100px;
+}
+
+#btnClearSignature:hover {
+background: #e0a800;
+}
+
+/* Color de acento (amarillo) - Botón Buscar */
+#btnBuscarCliente {
+background: var(--amarillo-1235);
+color: var(--dark-text);
+}
+
+#btnBuscarCliente:hover {
+background: #e0a800;
+}
+
+.small {
+font-size: 16px;
+color: var(--light-text);
+margin-left: 8px;
+}
+
+.hidden {
+display: none;
+}
+
+/* Input de foto */
+#seccion6-equipo input[type="file"] {
+padding: 18px;
+border: 2px dashed var(--verde-355);
+background: #f0fff4;
+}
+
+/* --- Estilos de la lista de repuestos (limpia) --- */
+.repuesto-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding: 14px; border: 1px solid #eee; border-radius: 10px; }
+.repuesto-item:hover { background: #fdfdfd; }
+.repuesto-item label { margin-top: 0; font-size: 19px; font-weight: 500; color: var(--light-text); }
+.repuesto-item input[type="number"] { width: 95px; margin-top: 0; padding: 14px; font-size: 19px; font-weight: 700; text-align: center; flex-shrink: 0; }
+.repuesto-item input[type="checkbox"] { width: 32px; height: 32px; flex-shrink: 0; margin-top: 0; }
+.repuestos-container { max-height: 380px; overflow-y: auto; padding: 15px; border: 1px solid #f0f0f0; border-radius: 10px; margin-top: 15px; }
+
+/* --- Fila de campos (para Sección 5) --- */
+.field-row, .search-row { display: flex; gap: 20px; align-items: flex-end; }
+.field-row-item { flex: 1; width: 100%; }
+.search-row .field-row-item { flex-grow: 1; }
+.search-row button { flex-grow: 0; flex-shrink: 0; min-width: 180px; margin-top: 10px; padding: 18px 22px; }
+
+/* Estilos para inputs de hora separados */
+.time-input-container { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.time-input { width: 90px; text-align: center; padding: 18px 10px; margin-top: 0; flex-grow: 0; flex-shrink: 0; }
+.time-separator { font-size: 24px; font-weight: bold; color: var(--dark-text); padding-bottom: 8px; }
+
+/*
+* --- SECCIÓN 16 (Inventario) MEJORADA ---
+*/
+.inventory-grid {
+display: grid;
+grid-template-columns: 2fr 0.8fr 1.2fr 0.8fr 1.2fr 1.2fr;
+gap: 5px;
+border: 1px solid #eee;
+padding: 10px;
+border-radius: 8px;
+margin-top: 15px;
+font-size: 16px;
+
+/* --- MEJORA: Scroll vertical y horizontal --- */
+max-height: 600px; /* Altura máxima antes de activar scroll */
+overflow-y: auto;  /* Scroll vertical */
+overflow-x: auto;  /* Scroll horizontal */
+}
+.inventory-header {
+font-weight: 700;
+color: var(--dark-text);
+padding: 10px 5px;
+border-bottom: 2px solid var(--verde-355);
+text-align: left;
+white-space: nowrap;
+
+/* --- MEJORA: Encabezados pegajosos (arriba) --- */
+position: sticky;
+top: 0;
+background-color: var(--white);
+z-index: 2; /* Encima de la columna pegajosa */
+}
+
+/* --- MEJORA: Columna PRODUCTO pegajosa (izquierda) --- */
+.inventory-header:first-child {
+position: sticky;
+left: 0;
+z-index: 3; /* Encima de todo */
+border-right: 1px solid #eee; /* Separador visual */
+}
+.inventory-cell.fixed-text[data-label="PRODUCTO"] {
+position: sticky;
+left: 0;
+z-index: 1; /* Debajo del header pegajoso */
+background-color: #f8f9fa; /* Aseguramos que tape */
+border-right: 1px solid #eee; /* Separador visual */
+}
+/* --- FIN DE MEJORAS SECCIÓN 16 --- */
+
+
+.inventory-row { display: contents; transition: background-color 0.3s ease; }
+.inventory-row.focused > .inventory-cell { background-color: var(--focus-row-bg); }
+.inventory-row.filled > .inventory-cell { background-color: var(--filled-row-bg); }
+.inventory-cell { padding: 8px 5px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; }
+.inventory-cell input[type="number"], .inventory-cell input[type="text"] { padding: 10px; font-size: 16px; margin-top: 0; border-width: 1px; }
+.inventory-cell input[readonly] { background-color: #f8f9fa; border-color: #e9ecef; font-weight: bold; text-align: right; }
+.inventory-cell.fixed-text { background-color: #f8f9fa; color: var(--light-text); justify-content: flex-start; padding-left: 10px; word-break: break-word; }
+.inventory-cell[data-label="Caja S/ITBIS"],
+.inventory-cell[data-label="Unidad s/ITBIS"] {
+justify-content: flex-end;
+padding-right: 10px;
+}
+
+/* Fila del total */
+.inventory-total-row { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; margin-top: 5px; padding-top: 5px; align-items: center; }
+.inventory-total-row:first-of-type { border-top: 2px solid var(--verde-355); margin-top: 10px; padding-top: 10px; }
+.total-label { grid-column: 2; font-weight: bold; text-align: right; padding-right: 10px; color: var(--dark-text); }
+.grand-total { grid-column: 3; font-weight: bold; font-size: 17px; text-align: right; color: var(--dark-text); padding-right: 10px; }
+.inventory-total-row:last-of-type { border-top: 2px solid var(--dark-text); margin-top: 10px; padding-top: 10px; }
+#grandTotalAmount { font-size: 20px !important; }
+
+/* Estilos Firma */
+.signature-canvas { border: 2px solid var(--border-color); border-radius: 10px; width: 100%; height: 250px; cursor: crosshair; margin-top: 10px; touch-action: none; }
+.signature-container { position: relative; width: 100%; }
+
+/* Estilo para el contenedor del resumen */
+#resumen_inventario_contenido {
+background-color: #f8f9fa;
+border: 1px solid var(--border-color);
+border-radius: 10px;
+padding: 20px;
+margin-top: 15px;
+font-size: 18px;
+line-height: 1.6;
+color: var(--dark-text);
+max-height: 400px;
+overflow-y: auto;
+}
+#resumen_inventario_contenido pre {
+margin: 0;
+font-family: inherit;
+white-space: pre-wrap;
+word-wrap: break-word;
+}
+
+
+/* AJUSTES MÓVILES */
+@media (max-width: 900px) {
+.inventory-grid {
+grid-template-columns: 1fr;
+gap: 0;
+border: none;
+padding: 0;
+/* Quitar scroll y sticky en móvil */
+max-height: none;
+overflow-y: visible;
+overflow-x: visible;
+}
+.inventory-header { display: none; }
+
+/* Quitar sticky a la columna de producto en móvil */
+.inventory-cell.fixed-text[data-label="PRODUCTO"] {
+position: static;
+left: auto;
+z-index: auto;
+border-right: none;
+}
+
+.inventory-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 10px; background-color: transparent !important; }
+.inventory-row.focused > .inventory-cell, .inventory-row.filled > .inventory-cell { background-color: transparent; }
+.inventory-cell { border-bottom: none; display: block; text-align: left !important; justify-content: flex-start !important; background-color: transparent !important; }
+.inventory-cell::before { content: attr(data-label); font-weight: bold; display: block; margin-bottom: 3px; color: var(--verde-355); font-size: 14px; }
+.inventory-cell:nth-child(3)::before,
+.inventory-cell:nth-child(5)::before,
+.inventory-cell:nth-child(6)::before
+{ content: attr(data-label); }
+.inventory-total-row { display: none; }
+}
+
+@media (max-width: 768px) {
+.card { width: 95%; padding: 25px; padding-bottom: 60px; }
+.form-title { font-size: 26px; }
+h2 { font-size: 24px; }
+label { font-size: 21px; }
+button { font-size: 19px; padding: 16px 20px;}
+input, select, textarea { font-size: 18px; padding: 16px;}
+.section-number { bottom: 10px; right: 15px; font-size: 12px;}
+.repuesto-item label { font-size: 17px; }
+.field-row, .search-row { flex-direction: column; gap: 0; align-items: stretch; }
+.search-row button { min-width: 100%; margin-top: 10px; margin-bottom: 0; }
+.time-input { width: 80px; padding: 16px 8px; }
+
+/* Mover botón de borrar para que no tape el contenido en móviles */
+#clear-backup-btn {
+bottom: 15px;
+right: 15px;
+padding: 10px 15px;
+font-size: 14px;
+}
+}
+
+/* --- ESTILOS DE GUARDADO AUTOMÁTICO --- */
+#save-status {
+position: fixed;
+top: 20px;
+right: 20px;
+background-color: rgba(0, 0, 0, 0.6);
+color: white;
+padding: 10px 18px;
+border-radius: 20px;
+font-size: 15px;
+font-weight: 600;
+font-family: 'Segoe UI', Arial, sans-serif;
+opacity: 0;
+transition: opacity 0.5s ease, transform 0.3s ease;
+transform: translateY(-10px);
+z-index: 1000;
+pointer-events: none;
+display: none;
+}
+
+#save-status.visible {
+display: block;
+opacity: 0.85;
+transform: translateY(0);
+}
+
+/* --- BOTÓN FLOTANTE PARA BORRAR --- */
+#clear-backup-btn {
+position: fixed;
+bottom: 25px;
+right: 25px;
+background-color: rgba(224, 60, 49, 0.75); /* var(--rojo-185) semi-transparente */
+color: white;
+font-family: 'Segoe UI', Arial, sans-serif;
+font-size: 16px;
+font-weight: 600;
+padding: 12px 18px;
+border: none;
+border-radius: 25px; /* Más redondeado */
+cursor: pointer;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+z-index: 999;
+opacity: 0.85;
+transition: all 0.3s ease;
+}
+#clear-backup-btn:hover {
+background-color: rgba(224, 60, 49, 1); /* Sólido al pasar el mouse */
+opacity: 1;
+transform: scale(1.05);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+</style>
+</head>
+
+<body>
+<div id="form-container"></div>
+
+<div id="save-status">Guardando...</div>
+
+<div id="clear-backup-btn" title="Borrar datos guardados y reiniciar">🗑️ Borrar Progreso</div>
+
+
+<script type="text/template" id="form-template">
+
+<div class="card" id="seccion1">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Selección del Técnico 👨‍🔧</h2>
+<label for="tecnico">Seleccione su nombre</label>
+<select id="tecnico">
+<option value="">-- Seleccione --</option>
+<option value="LUIS BALBUENA">LUIS BALBUENA</option>
+<option value="JUNIOR EFRAIN">JUNIOR EFRAIN</option>
+<option value="ADRIANDY MEDINA">ADRIANDY MEDINA</option>
+<option value="JOSE ALBERTO">JOSE ALBERTO</option>
+<option value="BLADIMIR NAO">BLADIMIR NAO</option>
+<option value="JUAN CARLOS ZAPATA">JUAN CARLOS ZAPATA</option>
+</select>
+<div class="actions">
+<button id="btnContinuar1">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 1</div>
+</div>
+
+<div class="card hidden" id="seccion2-moto">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Chequeo de moto 🏍️</h2>
+<label for="moto">¿Chequeó su moto?</label>
+<select id="moto">
+<option value="">-- Seleccione --</option>
+<option value="SI">Sí</option>
+<option value="NO">No</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_moto">⬅️ Atrás</button>
+<button id="btnContinuar_moto">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 2</div>
+</div>
+
+<div class="card hidden" id="seccion3-ubicacion">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Ubicación del equipo 📍</h2>
+<label for="ubicacion">Seleccione la ubicación</label>
+<select id="ubicacion">
+<option value="">-- Seleccione --</option>
+<option value="TALLER">Taller</option>
+<option value="CLIENTE">Equipo en el cliente</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_ubic">⬅️ Atrás</button>
+<button id="btnContinuar_ubic">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 3</div>
+</div>
+
+<div class="card hidden" id="seccion4-zona">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Selección de Zona 🗺️</h2>
+<label for="zona">Seleccione la zona</label>
+<select id="zona">
+<option value="">-- Seleccione --</option>
+<option value="CIUDAD">ZONA CIUDAD</option>
+<option value="NORTE">ZONA NORTE</option>
+<option value="SUR">ZONA SUR</option>
+<option value="ESTE">ZONA ESTE</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_zona">⬅️ Atrás</button>
+<button id="btnContinuar_zona">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 4</div>
+</div>
+
+<div class="card hidden" id="seccion5-cliente">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Datos del Cliente 👤</h2>
+<label for="codigoCliente">Código del Cliente</label>
+<div class="search-row">
+<div class="field-row-item">
+<input type="text" id="codigoCliente" placeholder="Ingrese el código" style="margin-top:0;">
+</div>
+<button id="btnBuscarCliente" type="button">Buscar 🔍</button>
+</div>
+<label for="nombreEstablecimiento">Nombre del Establecimiento</label>
+<input type="text" id="nombreEstablecimiento" readonly>
+<div class="field-row">
+<div class="field-row-item">
+<label for="telefono">Teléfono</label>
+<input type="text" id="telefono" readonly>
+</div>
+<div class="field-row-item">
+<label for="vendedor">Vendedor</label>
+<input type="text" id="vendedor" readonly>
+</div>
+</div>
+<label for="supervisor">Supervisor</label>
+<input type="text" id="supervisor" readonly>
+<div class="actions">
+<button class="btn-back" id="btnAtras_cliente">⬅️ Atrás</button>
+<button id="btnContinuar_cliente">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 5</div>
+</div>
+
+<div class="card hidden" id="seccion6-equipo">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Datos del Equipo 🧊</h2>
+<label for="placaFreezer">Placa del Freezer</label>
+<input type="text" id="placaFreezer" placeholder="Ej: FRZ-12345">
+<label for="modelo">Modelo</label>
+<input type="text" id="modelo" placeholder="Modelo del equipo">
+<label for="fotoPlaca">Foto de la placa (visible) 📸</label>
+<input type="file" id="fotoPlaca" accept="image/*" capture="environment">
+<div class="actions">
+<button class="btn-back" id="btnAtras_equipo">⬅️ Atrás</button>
+<button id="btnContinuar_equipo">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 6</div>
+</div>
+
+<div class="card hidden" id="seccion7-diagnostico">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Diagnóstico Inicial 🩺</h2>
+<label for="diagnosticoInicial">Diagnóstico inicial</label>
+<textarea id="diagnosticoInicial" rows="4" placeholder="Describa el diagnóstico..."></textarea>
+<label for="funcionamientoElectrico">Funcionamiento eléctrico</label>
+<select id="funcionamientoElectrico">
+<option value="">-- Seleccione --</option>
+<option value="CORRECTO">CORRECTO</option>
+<option value="INCORRECTO">INCORRECTO</option>
+</select>
+<label for="nivelGas">Nivel del gas</label>
+<select id="nivelGas">
+<option value="">-- Seleccione --</option>
+<option value="CORRECTO">CORRECTO</option>
+<option value="BAJO">BAJO</option>
+<option value="SIN REFRIGERANTE">SIN REFRIGERANTE</option>
+</select>
+<label for="requiereReparacion">¿Requiere reparación?</label>
+<select id="requiereReparacion">
+<option value="">-- Seleccione --</option>
+<option value="SI">SÍ</option>
+<option value="NO">NO</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_diag">⬅️ Atrás</button>
+<button id="btnContinuar_diag">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 7</div>
+</div>
+
+<div class="card hidden" id="seccion8-mantenimiento">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Tipo de Mantenimiento 🛠️</h2>
+<label for="tipoMantenimiento">Seleccione tipo</label>
+<select id="tipoMantenimiento">
+<option value="">-- Seleccione --</option>
+<option value="YP">YP</option>
+<option value="YA">YA</option>
+<option value="YM">YM</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_mantenimiento">⬅️ Atrás</button>
+<button id="btnContinuar_mantenimiento">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 8</div>
+</div>
+
+<div class="card hidden" id="seccion9-alistamiento">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Alistamiento Taller 🏭</h2>
+<label for="detalleAlistamiento">Detalle del alistamiento</label>
+<select id="detalleAlistamiento">
+<option value="">-- Seleccione --</option>
+<option value="ALISTAMIENTO MAYOR">Alistamiento mayor</option>
+<option value="ALISTAMIENTO MENOR">Alistamiento menor</option>
+<option value="ALISTAMIENTO RAPIDO">Alistamiento rápido</option>
+<option value="DESCARTE TALLER">Descarte taller</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_alistamiento">⬅️ Atrás</button>
+<button id="btnContinuar_alistamiento">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 9</div>
+</div>
+
+<div class="card hidden" id="seccion10-correctivo">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Mantenimiento Correctivo 🔧</h2>
+<label for="detalleCorrectivo">Detalle del correctivo</label>
+<textarea id="detalleCorrectivo" rows="4"></textarea>
+<label for="nombreAtendio">Nombre de quien atendió</label>
+<input type="text" id="nombreAtendio">
+<label for="telefonoAtendio">Teléfono de quien atendió</label>
+<input type="text" id="telefonoAtendio">
+<div class="actions">
+<button class="btn-back" id="btnAtras_correctivo">⬅️ Atrás</button>
+<button id="btnSiguiente_correctivo">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 10</div>
+</div>
+
+<div class="card hidden" id="seccion11-freezer">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Mantenimiento Freezer ❄️</h2>
+<label for="detalleFreezer">Detalle del mtto.</label>
+<select id="detalleFreezer">
+<option value="">-- Seleccione --</option>
+<option value="FALLA FUNCIONAL">Falla funcional</option>
+<option value="FALLA NO FUNCIONAL">Falla no funcional</option>
+<option value="MTTO PREVENTIVO">Mtto preventivo</option>
+<option value="NO APLICA ( N#A)">NO APLICA ( N#A)</option>
+</select>
+<div class="actions">
+<button class="btn-back" id="btnAtras_freezer">⬅️ Atrás</button>
+<button id="btnContinuar_freezer">Continuar ➡️</button>
+</div>
+<div class="section-number">Sección 11</div>
+</div>
+
+<div class="card hidden" id="seccion12-rep-funcional">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Repuestos Funcionales ⚙️</h2>
+<input type="text" id="searchRepFuncional" placeholder="Buscar repuesto... 🔍" style="margin-bottom: 20px;">
+
+<div class="repuestos-container">
+
+<div class="repuesto-item">
+<label for="qty_abanico_110v">ABANICO 110V</label>
+<input type="number" id="qty_abanico_110v" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_abanico_220v">ABANICO 220V</label>
+<input type="number" id="qty_abanico_220v" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_termostato_danfos">TERMOSTATO DANFOS</label>
+<input type="number" id="qty_termostato_danfos" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_termostato_digital">TERMOSTATO DIGITAL</label>
+<input type="number" id="qty_termostato_digital" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_relay">RELAY</label>
+<input type="number" id="qty_relay" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_overdload">OVERDLOAD</label>
+<input type="number" id="qty_overdload" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_compresor">COMPRESOR</label>
+<input type="number" id="qty_compresor" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_capacitor">CAPACITOR</label>
+<input type="number" id="qty_capacitor" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_cable">CABLE DE ALIMENTACIÓN</label>
+<input type="number" id="qty_cable" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_filtro">Filtro</label>
+<input type="number" id="qty_filtro" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_valvula">Valvula e Servicio</label>
+<input type="number" id="qty_valvula" min="0" value="0" pattern="\d*">
+</div>
+
+<div class="repuesto-item">
+<label for="chk_na_funcional">NO APLICA ( N#A)</label>
+<input type="checkbox" id="chk_na_funcional">
+</div>
+
+</div>
+<div class="actions">
+<button class="btn-back" id="btnAtras_rep_funcional">⬅️ Atrás</button>
+<button id="btnSiguiente_Sec12">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 12</div>
+</div>
+
+<div class="card hidden" id="seccion13-rep-nofuncional">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Fallas No Funcionales 📦</h2>
+<input type="text" id="searchRepNoFuncional" placeholder="Buscar componente... 🔍" style="margin-bottom: 20px;">
+
+<div class="repuestos-container">
+<div class="repuesto-item">
+<label for="qty_tapas">TAPAS</label>
+<input type="number" id="qty_tapas" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_ruedas">RUEDAS</label>
+<input type="number" id="qty_ruedas" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_biceles">BICELES</label>
+<input type="number" id="qty_biceles" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_ribetes">RIBETES</label>
+<input type="number" id="qty_ribetes" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_candado">CANDADO</label>
+<input type="number" id="qty_candado" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_parrillas">PARRILLAS</label>
+<input type="number" id="qty_parrillas" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_separadores">SEPARADORES/ REJILLAS</label>
+<input type="number" id="qty_separadores" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_luces">LUCES</label>
+<input type="number" id="qty_luces" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_bandeja">Bandeja de desague</label>
+<input type="number" id="qty_bandeja" min="0" value="0" pattern="\d*">
+</div>
+<div class="repuesto-item">
+<label for="qty_otros">OTROS</label>
+<input type="number" id="qty_otros" min="0" value="0" pattern="\d*">
+</div>
+
+<div class="repuesto-item">
+<label for="chk_na_nofuncional">N#A (NO APLICA)</label>
+<input type="checkbox" id="chk_na_nofuncional">
+</div>
+
+</div>
+<div class="actions">
+<button class="btn-back" id="btnAtras_rep_nofuncional">⬅️ Atrás</button>
+<button id="btnContinuar_Sec13">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 13</div>
+</div>
+
+<div class="card hidden" id="seccion14-descripcion">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>DESCRIPCIÓN DE LA REPARACIÓN 📝</h2>
+<label for="trabajoRealizado">TRABAJO REALIZADO</label>
+<textarea id="trabajoRealizado" rows="5" placeholder="Describa el trabajo efectuado..."></textarea>
+
+<label for="horaInicio_hh">HORA INICIO DE LA INTERVENCIÓN</label>
+<div class="time-input-container">
+<input type="number" id="horaInicio_hh" class="time-input" min="0" max="23" placeholder="HH">
+<span class="time-separator">:</span>
+<input type="number" id="horaInicio_mm" class="time-input" min="0" max="59" placeholder="mm">
+<span style="color: var(--light-text); font-size: 16px;">(Formato 24h)</span>
+</div>
+
+<label for="horaFinal_hh">HORA FINAL DE LA INTERVENCIÓN</label>
+<div class="time-input-container">
+<input type="number" id="horaFinal_hh" class="time-input" min="0" max="23" placeholder="HH">
+<span class="time-separator">:</span>
+<input type="number" id="horaFinal_mm" class="time-input" min="0" max="59" placeholder="mm">
+<span style="color: var(--light-text); font-size: 16px;">(Formato 24h)</span>
+</div>
+
+<div class="actions">
+<button class="btn-back" id="btnAtras_descripcion">⬅️ Atrás</button>
+<button id="btnSiguiente_descripcion">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 14</div>
+</div>
+
+<div class="card hidden" id="seccion15-estado">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>ESTADO DEL PRODUCTO Y MOVILIZACIÓN 🚚</h2>
+<label for="estadoMovilizacion">ESTADO FINAL MOVILIZACION</label>
+<select id="estadoMovilizacion">
+<option value="">-- Seleccione --</option>
+<option value="CON MOVILIZACION">CON MOVILIZACION</option>
+<option value="SIN MOVILIZACION">SIN MOVILIZACION</option>
+</select>
+
+<label for="estadoReposicion">ESTADO FINAL REPOSICION</label>
+<select id="estadoReposicion">
+<option value="">-- Seleccione --</option>
+<option value="SE SUGIERE REPOSICION DE PRODUCTO">SE SUGIERE REPOSICION DE PRODUCTO</option>
+<option value="NO SE SUGIERE REPOSICION DE PRODUCTO">NO SE SUGIERE REPOSICION DE PRODUCTO</option>
+<option value="NO APLICA PARA REPOSICION DE PRODUCTO">NO APLICA PARA REPOSICION DE PRODUCTO</option>
+</select>
+
+<div class="actions">
+<button class="btn-back" id="btnAtras_estado">⬅️ Atrás</button>
+<button id="btnContinuar_estado">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 15</div>
+</div>
+
+<div class="card hidden" id="seccion16-inventario">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>FORMATO DE TOMA DE INVENTARIO 📊</h2>
+<input type="text" id="searchInventory" placeholder="Buscar producto... 🔍" style="margin-bottom: 20px;">
+
+<div class="inventory-grid" id="inventory-table">
+<div class="inventory-header">PRODUCTO</div>
+<div class="inventory-header">CANTIDAD</div>
+<div class="inventory-header">SUB TOTAL</div>
+<div class="inventory-header">FORMATO</div>
+<div class="inventory-header">$ CAJA S/ITBIS</div>
+<div class="inventory-header">$ UNIDAD S/ITBIS</div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Choco Choco 32</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">32</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,535.67</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="47.99">RD$ 47.99</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta de Choco Crema 32</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">32</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,535.67</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="47.99">RD$ 47.99</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Choco Crema Mani 32</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">32</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,535.67</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="47.99">RD$ 47.99</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Choco Crema Dulce de Leche 32</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">32</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,535.67</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="47.99">RD$ 47.99</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta. Choco Crema Choc. Don Alfonso 32</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">32</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,535.67</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="47.99">RD$ 47.99</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Agua Paleta de Uva 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 711.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="19.76">RD$ 19.76</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">MAgua Paleta de Manzana 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 711.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="19.76">RD$ 19.76</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Agua Paleta de Frambuesa 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 711.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="19.76">RD$ 19.76</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Agua Paleta de Cherry 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 711.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="19.76">RD$ 19.76</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Agua Paleta de Mora 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 711.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="19.76">RD$ 19.76</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Agua Paleta Bon Ice 70 mL 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 610.00</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="25.42">RD$ 25.42</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Fudge Vainilla Caja 36</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">36</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 916.31</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="25.42">RD$ 25.42</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Fudge Bizcocho 85 g. caja 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 610.00</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="25.42">RD$ 25.42</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Fudge Chocolate 85 g. caja 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 610.00</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="25.42">RD$ 25.42</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Fruta Paleta de Chinola 85 g. caja 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,016.34</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Fruta Paleta de Fresa 85 g. caja 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,016.34</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Fruta Paleta de Coco 85 g. caja 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,016.34</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Chinola Crema 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,016.34</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Fresa Crema 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,016.34</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">SANDWICH BON VAINILLA 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,585.57</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="66.07">RD$ 66.07</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Magnum Clasica 90ML 25</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">25</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 2,403.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="96.13">RD$ 96.13</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta Magnum Cookie Remix 85 ml 25</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">25</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 2,403.20</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="96.13">RD$ 96.13</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Mordisko Clas. 105 Ml 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,589.50</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="66.23">RD$ 66.23</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta TOSH Mora 75gx16</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">16</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 677.56</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Paleta TOSH Pina x75gx16</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">16</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 677.56</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.35">RD$ 42.35</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LT Helado BON Fresa</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 897.03</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="149.51">RD$ 149.51</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LT Helado BON Vainilla</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 897.03</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="149.51">RD$ 149.51</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LT Helado Ron Pasas</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 897.03</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="149.51">RD$ 149.51</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA ETI.NEGRA Hel. Merengue de Quisqueya 262g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA ETI.NEGRA Helado Macadamia 262g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA ETI.NEGRA Helado Bizcocho Maccine</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA ETI.NEGRA Hel. Don Alfonso 262g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA ETI.NEGRA Helado Vainilla Imperial</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LB Helado Vlla con Jasp Choc 0% az 262g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LB Hel. galleta sin lactosa 262 g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LB Frutos del bosque Cero Azu.262g</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">PINTA LB Fresa con chunks fresa 0% az 262</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,181.38</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="196.90">RD$ 196.90</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">2 PINTA LT Helado BON Vainilla 2 Pintas</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,336.68</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="222.78">RD$ 222.78</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">2 PINTA LT Helado BON Vainilla</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,336.68</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="222.78">RD$ 222.78</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">2 PINTA LT Helado Chocolate </div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,336.68</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="222.78">RD$ 222.78</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">2 PINTA LT Helado Bizcocho</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,336.68</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="222.78">RD$ 222.78</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">2 PINTA LT Helado BON Fresa</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">6</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,336.68</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="222.78">RD$ 222.78</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Cajita Helado Fresa C-3.5 onz 24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,017.16</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.38">RD$ 42.38</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Cajita Helado Vainilla C-3.5 onz.24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,017.16</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.38">RD$ 42.38</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Cajita Helado Chocolate C-3.5 Onz.24</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">24</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,017.16</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="42.38">RD$ 42.38</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Copa Bon Fresa 16</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">16</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,129.79</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="70.61">RD$ 70.61</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Copa Bon Chips de Chocolate 16</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">16</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,129.79</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="70.61">RD$ 70.61</div> </div>
+
+<div class="inventory-row">
+<div class="inventory-cell fixed-text" data-label="PRODUCTO">Copa Bon Chocolate Priscila 16</div>
+<div class="inventory-cell" data-label="CANTIDAD">
+<input type="number" class="cantidad-producto" min="0">
+</div>
+<div class="inventory-cell" data-label="SUB TOTAL">
+<input type="text" class="subtotal-producto" readonly value="RD$ 0.00" data-value="0.00"> </div>
+<div class="inventory-cell fixed-text" data-label="FORMATO">16</div>
+<div class="inventory-cell fixed-text" data-label="Caja S/ITBIS">RD$ 1,129.79</div> <div class="inventory-cell fixed-text" data-label="Unidad s/ITBIS" data-costo="70.61">RD$ 70.61</div> </div>
+
+<div class="inventory-total-row">
+<div></div>
+<div class="total-label">SUB TOTAL:</div>
+<div class="grand-total" id="grandSubTotal">RD$ 0.00</div> <div></div>
+<div></div>
+<div></div>
+</div>
+<div class="inventory-total-row">
+<div></div>
+<div class="total-label">ITBIS (18%):</div>
+<div class="grand-total" id="itbisAmount">RD$ 0.00</div> <div></div>
+<div></div>
+<div></div>
+</div>
+<div class="inventory-total-row">
+<div></div>
+<div class="total-label">TOTAL GENERAL:</div>
+<div class="grand-total" id="grandTotalAmount">RD$ 0.00</div> <div></div>
+<div></div>
+<div></div>
+</div>
+</div>
+
+<div class="actions">
+<button class="btn-back" id="btnAtras_inventario" type="button">⬅️ Atrás</button>
+<button id="btnSiguiente_inventario" type="button">Siguiente ➡️</button>
+</div>
+<div class="section-number">Sección 16</div>
+</div>
+
+<div class="card hidden" id="seccion16_resumen">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>Resumen de Inventario 📋</h2>
+<div id="resumen_inventario_contenido">
+<pre></pre>
+</div>
+<div class="actions">
+<button class="btn-back" id="btnAtras_resumen" type="button">⬅️ Modificar</button>
+<button id="btnSiguiente_resumen" type="button">Continuar ➡️</button>
+</div>
+<div class="section-number">Resumen</div>
+</div>
+
+<div class="card hidden" id="seccion17-firma">
+<h1 class="form-title">FORMULARIO DE MANTENIMIENTO Y ACTIVOS COMERCIALES 🛠️</h1>
+<h2>FIRMA DEL CLIENTE ✍️</h2>
+<label>Firma del cliente:</label>
+<div class="signature-container">
+<canvas id="signature-pad" class="signature-canvas"></canvas>
+</div>
+<div class="actions" style="justify-content: center;">
+<button id="btnClearSignature" type="button" style="flex-grow: 0.5;">Limpiar Firma</button>
+</div>
+<div class="actions">
+<button class="btn-back" id="btnAtras_firma" type="button">⬅️ Atrás</button>
+<button id="btnFinalizar_firma" type="button">Finalizar ✅</button>
+</div>
+<div class="section-number">Sección 17</div>
+</div>
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<script>
+(function() {
+
+// --- VARIABLES GLOBALES DE ESTADO ---
+let signaturePad = null;
+let currentPath = ''; // Guarda el camino (YP, YA, YM)
+let isDescarteTaller = false;
+let fotoPlacaBase64 = null; // <-- AGREGA ESTA LÍNEA
+let fotoPlacaMimeType = null; // <-- AGREGA ESTA LÍNEA
+
+// --- Variables de Guardado Automático ---
+const LOCAL_STORAGE_KEY = 'formDataBackup';
+const statusEl = document.getElementById('save-status');
+
+// --- Función Debounce ---
+function debounce(func, wait) {
+let timeout;
+return function(...args) {
+const context = this;
+clearTimeout(timeout);
+timeout = setTimeout(() => func.apply(context, args), wait);
+};
+}
+
+// --- Funciones de Estado de Guardado ---
+function updateSaveStatus(message) {
+if (!statusEl) return;
+statusEl.textContent = message;
+statusEl.style.display = 'block';
+setTimeout(() => statusEl.classList.add('visible'), 10);
+}
+
+function hideSaveStatus(delay = 1500) {
+if (!statusEl) return;
+setTimeout(() => {
+statusEl.classList.remove('visible');
+setTimeout(() => {
+if (!statusEl.classList.contains('visible')) {
+statusEl.style.display = 'none';
+}
+}, 500);
+}, delay);
+}
+
+// --- MEJORA: Función para Guardar en localStorage ---
+function saveToLocalStorage() {
+const container = document.getElementById('form-container');
+if (!container) return;
+
+updateSaveStatus('Guardando...');
+
+const dataToSave = {};
+// Guardar inputs, selects, textareas (AHORA INCLUYE READONLY)
+container.querySelectorAll('input, select, textarea').forEach(el => {
+// Solo guardar si tiene ID (ya no filtramos por readOnly)
+if (el.id) {
+if (el.type === 'checkbox') {
+dataToSave[el.id] = el.checked;
+} else if (el.type === 'file') {
+// No podemos guardar archivos
+} else {
+dataToSave[el.id] = el.value;
+}
+}
+});
+
+// MEJORA: Guardar específicamente las cantidades de inventario (ya que no tienen ID)
+const inventoryQuantities = [];
+container.querySelectorAll('#inventory-table .cantidad-producto').forEach((input, index) => {
+// Usamos el índice como identificador único para esta sesión
+inventoryQuantities.push({ index: index, value: input.value });
+});
+dataToSave['inventoryQuantities'] = inventoryQuantities;
+
+
+// Guardar firma
+if (signaturePad && !signaturePad.isEmpty()) {
+dataToSave['signaturePadData'] = signaturePad.toDataURL();
+}
+
+// CORREGIDO: Guardar foto independientemente de la firma
+dataToSave['fotoPlacaBase64'] = fotoPlacaBase64;
+dataToSave['fotoPlacaMimeType'] = fotoPlacaMimeType;
+
+
+try {
+localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
+updateSaveStatus('Guardado sin conexión');
+hideSaveStatus();
+} catch (e) {
+console.error('Error al guardar en localStorage:', e);
+updateSaveStatus('Error al guardar');
+hideSaveStatus(3000);
+}
+}
+
+const debouncedSave = debounce(saveToLocalStorage, 1000);
+
+// --- MEJORA: Función para Cargar de localStorage ---
+function loadFromLocalStorage() {
+    const container = document.getElementById('form-container');
+    if (!container) return;
+
+    try {
+        const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (!savedData) {
+            console.log('No hay datos locales para cargar.');
+            return;
+        }
+
+        const data = JSON.parse(savedData);
+        let hasRestoredData = false;
+
+        // Restaurar todos los campos con ID
+        Object.keys(data).forEach(key => { // <--- El forEach empieza aquí
+            const el = container.querySelector('#' + key);
+            if (el) {
+                if (el.type === 'checkbox') {
+                    el.checked = data[key];
+                } else if (el.type !== 'file') {
+                    el.value = data[key];
+                }
+                hasRestoredData = true;
+            }
+        }); // <--- ¡¡AQUÍ ESTABA EL ERROR DE SINTAXIS!!
+
+        // Restaurar foto (si existe)
+        if (data['fotoPlacaBase64']) {
+            fotoPlacaBase64 = data['fotoPlacaBase64'];
+        }
+        if (data['fotoPlacaMimeType']) {
+            fotoPlacaMimeType = data['fotoPlacaMimeType'];
+        }
+
+        // MEJORA: Restaurar cantidades de inventario
+        // (¡EL BLOQUE ROTO Y DUPLICADO SE HA ELIMINADO!)
+        if (data['inventoryQuantities']) {
+            const allQtyInputs = container.querySelectorAll('#inventory-table .cantidad-producto');
+            data['inventoryQuantities'].forEach(item => {
+                if (allQtyInputs[item.index]) {
+                    allQtyInputs[item.index].value = item.value;
+                }
+            });
+            // Recalcular totales si restauramos inventario
+            setTimeout(calcularTotalesInventario, 100);
+            hasRestoredData = true;
+        }
+
+
+        if (hasRestoredData) {
+            console.log('Datos restaurados desde localStorage.');
+            updateSaveStatus('Progreso restaurado');
+            hideSaveStatus();
+        }
+
+    } catch (e) {
+        console.error('Error al cargar desde localStorage (borrando datos corruptos):', e);
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+    }
+}
+
+// --- FUNCIÓN PRINCIPAL DE RENDERIZADO (MODIFICADA) ---
+function renderTemplate() {
+const tpl = document.getElementById('form-template').innerHTML;
+const container = document.getElementById('form-container');
+container.innerHTML = tpl;
+
+currentPath = '';
+isDescarteTaller = false;
+signaturePad = null;
+
+window.removeEventListener("resize", resizeCanvas);
+
+attachHandlers();
+calcularTotalesInventario();
+
+// Cargar datos DESPUÉS de adjuntar handlers y ANTES de mostrar la sección 1
+loadFromLocalStorage();
+
+show('seccion1');
+}
+
+// --- FUNCIÓN DE NAVEGACIÓN (MODIFICADA) ---
+function show(id) {
+const container = document.getElementById('form-container');
+if (!container) return;
+
+container.querySelectorAll('.card').forEach(el => { if (el) el.classList.add('hidden'); });
+
+const el = container.querySelector('#' + id);
+if (el) {
+el.classList.remove('hidden');
+window.scrollTo(0, 0); // Regresar al inicio de la página al cambiar de sección
+
+if (id === 'seccion17-firma') {
+const canvas = container.querySelector('#signature-pad');
+if (canvas) {
+if (!signaturePad) { initializeSignaturePad(canvas); }
+resizeCanvas();
+
+// Restaurar firma
+try {
+const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+if (savedData) {
+const data = JSON.parse(savedData);
+if (data['signaturePadData'] && signaturePad && signaturePad.isEmpty()) {
+signaturePad.fromDataURL(data['signaturePadData']);
+console.log('Firma restaurada desde localStorage.');
+}
+}
+} catch(e) { console.error('Error al restaurar firma:', e); }
+}
+}
+} else {
+console.warn(`Se intentó mostrar sección inexistente: #${id}`);
+}
+}
+
+// --- FUNCIONES DE UTILIDAD (Firma) (MODIFICADA) ---
+function initializeSignaturePad(canvasElement) {
+if (!canvasElement || signaturePad) return;
+try {
+signaturePad = new SignaturePad(canvasElement, {
+backgroundColor: 'rgb(255, 255, 255)',
+penColor: 'rgb(0, 0, 0)',
+minWidth: 2.0,
+maxWidth: 3.0
+});
+window.addEventListener("resize", resizeCanvas);
+
+// Guardar al terminar de firmar
+signaturePad.addEventListener("endStroke", () => {
+console.log('Firma actualizada, guardando...');
+debouncedSave();
+});
+
+console.log("SignaturePad inicializado.");
+} catch(e){
+console.error("Error inicializando SignaturePad:", e);
+signaturePad = null;
+}
+}
+
+function resizeCanvas() {
+const container = document.getElementById('form-container');
+const canvas = container ? container.querySelector('#signature-pad') : null;
+if (!canvas || !signaturePad) return;
+
+const signatureSection = container.querySelector('#seccion17-firma');
+if (signatureSection && !signatureSection.classList.contains('hidden')) {
+if (canvas.offsetWidth > 0 && canvas.offsetHeight > 0) {
+const ratio = Math.max(window.devicePixelRatio || 1, 1);
+const data = signaturePad.toData();
+
+canvas.width = canvas.offsetWidth * ratio;
+canvas.height = canvas.offsetHeight * ratio;
+
+const ctx = canvas.getContext("2d");
+if (ctx) {
+ctx.scale(ratio, ratio);
+signaturePad.fromData(data);
+} else {
+console.error("No se pudo obtener el contexto 2D.");
+}
+}
+}
+}
+
+// --- FUNCIÓN PARA FORMATEAR MONEDA RD$ ---
+function formatCurrencyRD(number) {
+if (isNaN(number) || number === null) {
+return 'RD$ 0.00';
+}
+const formatter = new Intl.NumberFormat('es-DO', {
+style: 'currency',
+currency: 'DOP',
+minimumFractionDigits: 2,
+maximumFractionDigits: 2
+});
+return formatter.format(number);
+}
+
+// --- FUNCIONES DE UTILIDAD (Formulario) ---
+function clearAllFields(container) {
+if (!container) return;
+
+container.querySelectorAll('input, select, textarea').forEach(el => {
+if (el.type === 'file') {
+el.value = ''; // Limpiar input de archivo
+return;
+}
+if (el.classList.contains('time-input')) { el.value = ''; }
+// Limpiar todo lo que NO sea readonly O un subtotal
+else if (!el.readOnly || el.classList.contains('subtotal-producto')) {
+if (!el.classList.contains('cantidad-producto')) {
+el.value = '';
+}
+}
+
+if (el.tagName.toLowerCase() === 'select') el.selectedIndex = 0;
+
+if (el.id === 'detalleFreezer') { Array.from(el.options).forEach(opt => opt.disabled = false); }
+if (el.id === 'estadoReposicion') {
+const btnEstado = container.querySelector('#btnContinuar_estado');
+if (btnEstado) btnEstado.textContent = 'Siguiente ➡️';
+}
+if (el.classList.contains('cantidad-producto')) { el.value = ''; } // Limpiar cantidades
+if (el.classList.contains('subtotal-producto')) {
+el.value = formatCurrencyRD(0);
+el.dataset.value = '0.00';
+}
+});
+
+// Limpiar campos readonly que se llenan con la búsqueda
+['#nombreEstablecimiento','#telefono','#vendedor','#supervisor'].forEach(id => {
+const el = container.querySelector(id); if(el) el.value='';
+});
+
+container.querySelectorAll('.inventory-row').forEach(row => { row.classList.remove('focused', 'filled'); });
+
+const resumenContenido = container.querySelector('#resumen_inventario_contenido pre');
+if(resumenContenido) resumenContenido.textContent = '';
+
+calcularTotalesInventario();
+if (signaturePad) { signaturePad.clear(); }
+}
+
+// --- FUNCIÓN calcularTotalesInventario ---
+function calcularTotalesInventario() {
+const container = document.getElementById('form-container');
+if (!container) return;
+
+// Primero, recalcular todos los subtotales basado en las cantidades
+container.querySelectorAll('#inventory-table .cantidad-producto').forEach(cInput => {
+const cant = parseFloat(cInput.value) || 0;
+const row = cInput.closest('.inventory-row');
+if (!row) return;
+const cCell = row.querySelector('.inventory-cell[data-costo]');
+if (!cCell) return;
+const cUnit = parseFloat(cCell.getAttribute('data-costo')) || 0;
+const subInput = row.querySelector('.subtotal-producto');
+if (!subInput) return;
+
+const subtotalNumerico = cant * cUnit;
+subInput.value = formatCurrencyRD(subtotalNumerico); // Muestra formateado
+subInput.dataset.value = subtotalNumerico.toFixed(2); // Guarda número interno
+
+if (cant > 0) { row.classList.add('filled'); }
+else { row.classList.remove('filled'); }
+});
+
+// Ahora, sumar todos los subtotales
+const subTotalElements = container.querySelectorAll('.subtotal-producto');
+let grandSubTotalCalc = 0;
+
+subTotalElements.forEach(input => {
+const value = parseFloat(input.dataset.value || 0);
+grandSubTotalCalc += value;
+});
+
+const itbis = grandSubTotalCalc * 0.18;
+const grandTotal = grandSubTotalCalc + itbis;
+
+const grandSubTotalElement = container.querySelector('#grandSubTotal');
+const itbisElement = container.querySelector('#itbisAmount');
+const grandTotalElement = container.querySelector('#grandTotalAmount');
+
+if (grandSubTotalElement) grandSubTotalElement.textContent = formatCurrencyRD(grandSubTotalCalc);
+if (itbisElement) itbisElement.textContent = formatCurrencyRD(itbis);
+if (grandTotalElement) grandTotalElement.textContent = formatCurrencyRD(grandTotal);
+}
+
+// --- FUNCIONES PARA RECOPILAR Y GUARDAR DATOS ---
+function recopilarDatosFormulario() {
+const container = document.getElementById('form-container');
+const g = (id) => container.querySelector('#' + id) || {};
+
+let repFuncionales = [];
+container.querySelectorAll('#seccion12-rep-funcional .repuesto-item').forEach(item => {
+const input = item.querySelector('input[type="number"]');
+const chk = item.querySelector('input[type="checkbox"]');
+if (input && input.value > 0) { repFuncionales.push(`${item.querySelector('label').textContent}: ${input.value}`); }
+if (chk && chk.checked) { repFuncionales.push(item.querySelector('label').textContent); }
+});
+
+let repNoFuncionales = [];
+container.querySelectorAll('#seccion13-rep-nofuncional .repuesto-item').forEach(item => {
+const input = item.querySelector('input[type="number"]');
+const chk = item.querySelector('input[type="checkbox"]');
+if (input && input.value > 0) { repNoFuncionales.push(`${item.querySelector('label').textContent}: ${input.value}`); }
+if (chk && chk.checked) { repNoFuncionales.push(item.querySelector('label').textContent); }
+});
+
+const grandTotalElement = container.querySelector('#grandTotalAmount');
+let totalInventarioValorNumerico = '0.00';
+if (grandTotalElement) {
+const match = grandTotalElement.textContent.match(/[\d,.]+/);
+if (match) {
+totalInventarioValorNumerico = match[0].replace(/,/g, '');
+}
+}
+
+// Esta variable es para guardar el correo del cliente que viene de la búsqueda
+// La definimos aquí para que esté en el "scope" de la función
+let correoClienteObtenido = "";
+// Intentamos buscar si ya existe en el formulario (aunque esté oculto)
+const datosClienteExistentes = localStorage.getItem(LOCAL_STORAGE_KEY);
+if (datosClienteExistentes) {
+    try {
+        correoClienteObtenido = JSON.parse(datosClienteExistentes).correoCliente || "";
+    } catch(e) {}
+}
+
+
+const datos = {
+tecnico: g('tecnico').value,
+moto: g('moto').value,
+ubicacion: g('ubicacion').value,
+zona: g('zona').value,
+codigoCliente: g('codigoCliente').value,
+nombreEstablecimiento: g('nombreEstablecimiento').value,
+telefono: g('telefono').value,
+vendedor: g('vendedor').value,
+supervisor: g('supervisor').value,
+placaFreezer: g('placaFreezer').value,
+modelo: g('modelo').value,
+fotoPlacaBase64: fotoPlacaBase64, // <-- Dato de la foto
+fotoPlacaMimeType: fotoPlacaMimeType, // <-- Dato de la foto
+correoCliente: correoClienteObtenido, // <-- Dato del correo
+diagnosticoInicial: g('diagnosticoInicial').value,
+funcionamientoElectrico: g('funcionamientoElectrico').value,
+nivelGas: g('nivelGas').value,
+requiereReparacion: g('requiereReparacion').value,
+tipoMantenimiento: g('tipoMantenimiento').value,
+detalleAlistamiento: g('detalleAlistamiento').value,
+detalleCorrectivo: g('detalleCorrectivo').value,
+nombreAtendio: g('nombreAtendio').value,
+telefonoAtendio: g('telefonoAtendio').value,
+detalleFreezer: g('detalleFreezer').value,
+repuestosFuncionales: repFuncionales.join(', ') || 'N/A',
+repuestosNoFuncionales: repNoFuncionales.join(', ') || 'N/A',
+trabajoRealizado: g('trabajoRealizado').value,
+horaInicio: `${g('horaInicio_hh').value || '00'}:${g('horaInicio_mm').value || '00'}`,
+horaFinal: `${g('horaFinal_hh').value || '00'}:${g('horaFinal_mm').value || '00'}`,
+estadoMovilizacion: g('estadoMovilizacion').value,
+estadoReposicion: g('estadoReposicion').value,
+totalInventario: totalInventarioValorNumerico,
+firmaBase64: (signaturePad && !signaturePad.isEmpty()) ? signaturePad.toDataURL() : 'SIN FIRMA'
+};
+
+return datos;
+}
+
+function recopilarDatosInventario() {
+const container = document.getElementById('form-container');
+let inventario = [];
+const filas = container.querySelectorAll('#inventory-table .inventory-row');
+
+filas.forEach(row => {
+const cantidadInput = row.querySelector('.cantidad-producto');
+const cantidad = parseInt(cantidadInput.value, 10) || 0;
+
+if (cantidad > 0) {
+const producto = row.querySelector('.inventory-cell[data-label="PRODUCTO"]').textContent;
+const costoUnidadEl = row.querySelector('.inventory-cell[data-costo]');
+const costoUnidad = costoUnidadEl ? parseFloat(costoUnidadEl.dataset.costo) : 0;
+const subtotalInput = row.querySelector('.subtotal-producto');
+const subtotal = subtotalInput ? parseFloat(subtotalInput.dataset.value).toFixed(2) : '0.00';
+
+inventario.push({
+producto: producto,
+cantidad: cantidad,
+costoUnidad: costoUnidad,
+subtotal: subtotal
+});
+}
+});
+return inventario;
+}
+
+function onGuardadoExitoso(respuesta) {
+if (respuesta && respuesta.status === 'OK') {
+alert('✅ ¡Éxito!\nReporte guardado con el ID: ' + respuesta.id);
+
+try {
+localStorage.removeItem(LOCAL_STORAGE_KEY);
+console.log('Backup local borrado tras éxito.');
+} catch(e) { console.error('Error al borrar backup local:', e); }
+
+renderTemplate();
+} else {
+console.error('Error del servidor:', respuesta.message);
+alert('❌ Error al guardar en Google Sheets.\n\nDetalle: ' + (respuesta.message || 'Error desconocido') + '\n\nRevise la consola para más detalles.');
+const btn = document.getElementById('btnFinalizar_firma');
+if(btn) { btn.disabled = false; btn.textContent = 'Finalizar ✅'; }
+}
+}
+
+function onFalloAlGuardar(error) {
+console.error('Error de google.script.run:', error);
+alert('❌ Fallo la conexión con el servidor.\n\nError: ' + error.message + '\n\nPor favor, revise su conexión o contacte al administrador.');
+const btn = document.getElementById('btnFinalizar_firma');
+if(btn) { btn.disabled = false; btn.textContent = 'Finalizar ✅'; }
+}
+
+// --- FUNCIÓN DE MANEJADORES (ATTACH HANDLERS) ---
+function attachHandlers() {
+    const container = document.getElementById('form-container');
+    if (!container) { console.error("El contenedor #form-container no existe."); return; }
+
+    // (Selección de elementos)
+    const tecnico = container.querySelector('#tecnico');
+    const btnContinuar1 = container.querySelector('#btnContinuar1');
+    const ubicacion = container.querySelector('#ubicacion');
+    const zona = container.querySelector('#zona');
+    const codigoCliente = container.querySelector('#codigoCliente');
+    const btnBuscarCliente = container.querySelector('#btnBuscarCliente');
+    const placaFreezer = container.querySelector('#placaFreezer');
+    const modelo = container.querySelector('#modelo');
+    const tipoMantenimiento = container.querySelector('#tipoMantenimiento');
+    const detalleAlistamiento = container.querySelector('#detalleAlistamiento');
+    const detalleFreezer = container.querySelector('#detalleFreezer');
+    const estadoReposicion = container.querySelector('#estadoReposicion');
+    const btnContinuarEstado = container.querySelector('#btnContinuar_estado');
+    const btnClearSignature = container.querySelector('#btnClearSignature');
+    const fotoPlacaInput = container.querySelector('#fotoPlaca'); // <-- LÍNEA CORRECTA
+
+    // (Lógica de Buscadores)
+    const searchRepFuncional = container.querySelector('#searchRepFuncional');
+    const itemsRepFuncional = container.querySelectorAll('#seccion12-rep-funcional .repuesto-item');
+    if (searchRepFuncional && itemsRepFuncional.length > 0) {
+        searchRepFuncional.addEventListener('input', (e) => {
+            const st = e.target.value.toLowerCase().trim();
+            itemsRepFuncional.forEach(item => {
+                const l = item.querySelector('label');
+                if (l) { const it = l.textContent.toLowerCase(); item.style.display = it.includes(st) ? 'flex' : 'none'; }
+            });
+        });
+    }
+    const searchRepNoFuncional = container.querySelector('#searchRepNoFuncional');
+    const itemsRepNoFuncional = container.querySelectorAll('#seccion13-rep-nofuncional .repuesto-item');
+    if (searchRepNoFuncional && itemsRepNoFuncional.length > 0) {
+        searchRepNoFuncional.addEventListener('input', (e) => {
+            const st = e.target.value.toLowerCase().trim();
+            itemsRepNoFuncional.forEach(item => {
+                const l = item.querySelector('label');
+                if (l) { const it = l.textContent.toLowerCase(); item.style.display = it.includes(st) ? 'flex' : 'none'; }
+            });
+        });
+    }
+    const searchInventory = container.querySelector('#searchInventory');
+    const inventoryRows = container.querySelectorAll('#inventory-table .inventory-row');
+    if (searchInventory && inventoryRows.length > 0) {
+        searchInventory.addEventListener('input', (e) => {
+            const st = e.target.value.toLowerCase().trim();
+            inventoryRows.forEach(row => {
+                const productCell = row.querySelector('.inventory-cell[data-label="PRODUCTO"]');
+                let isVisible = false;
+                if (productCell && productCell.textContent.toLowerCase().includes(st)) {
+                    isVisible = true;
+                }
+                
+                // Aplicar 'display: contents' (para grid) o 'none' a la fila
+                const cells = row.querySelectorAll('.inventory-cell');
+                cells.forEach(c => {
+                    c.style.display = isVisible ? '' : 'none'; 
+                });
+            });
+        });
+    }
+
+    // --- ¡¡ARREGLADO!! ---
+    // (Este bloque va aquí afuera, no dentro del buscador de inventario)
+    // (NUEVO: Lógica de captura de foto)
+    if (fotoPlacaInput) {
+        fotoPlacaInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) {
+                fotoPlacaBase64 = null;
+                fotoPlacaMimeType = null;
+                return;
+            }
+            updateSaveStatus('Procesando foto...');
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const fullDataUrl = reader.result;
+                const parts = fullDataUrl.split(',');
+                fotoPlacaMimeType = parts[0].split(':')[1].split(';')[0];
+                fotoPlacaBase64 = parts[1];
+                console.log('Foto capturada y convertida.');
+                debouncedSave(); 
+                hideSaveStatus();
+            };
+            reader.onerror = () => {
+                console.error('Error al leer el archivo de imagen.');
+                alert('Hubo un error al procesar la foto.');
+                fotoPlacaBase64 = null;
+                fotoPlacaMimeType = null;
+                hideSaveStatus(0);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    // --- FIN DEL ARREGLO ---
+
+
+    // (Lógica de Firma)
+    if (btnClearSignature) {
+        btnClearSignature.addEventListener('click', () => {
+            if (signaturePad) signaturePad.clear();
+            debouncedSave();
+        });
+    }
+
+    // (Lógica de Navegación)
+    if (btnContinuar1 && tecnico) {
+        btnContinuar1.addEventListener('click', function() {
+            const t = tecnico.value;
+            if (!t) { alert('Seleccione un técnico.'); return; }
+            if (t === 'JUAN CARLOS ZAPATA') { show('seccion2-moto'); }
+            else { show('seccion3-ubicacion'); }
+        });
+    }
+    const btnAtrasMoto = container.querySelector('#btnAtras_moto');
+    if (btnAtrasMoto) btnAtrasMoto.addEventListener('click', () => show('seccion1'));
+    const btnContinuarMoto = container.querySelector('#btnContinuar_moto');
+    if (btnContinuarMoto) btnContinuarMoto.addEventListener('click', () => show('seccion3-ubicacion'));
+    const btnAtrasUbic = container.querySelector('#btnAtras_ubic');
+    if (btnAtrasUbic) btnAtrasUbic.addEventListener('click', () => show('seccion1'));
+    const btnContinuarUbic = container.querySelector('#btnContinuar_ubic');
+    if (btnContinuarUbic && ubicacion) btnContinuarUbic.addEventListener('click', () => {
+        const u = ubicacion.value;
+        if (!u) { alert('Seleccione ubicación.'); return; }
+        if (u === 'CLIENTE') show('seccion4-zona');
+        else if (u === 'TALLER') {
+            show('seccion6-equipo');
+        }
+    });
+    const btnAtrasZona = container.querySelector('#btnAtras_zona');
+    if (btnAtrasZona) btnAtrasZona.addEventListener('click', () => show('seccion3-ubicacion'));
+    const btnContinuarZona = container.querySelector('#btnContinuar_zona');
+    if (btnContinuarZona && zona) btnContinuarZona.addEventListener('click', () => {
+        if (!zona.value) { alert('Seleccione zona.'); return; } show('seccion5-cliente');
+    });
+    const btnAtrasCliente = container.querySelector('#btnAtras_cliente');
+    if (btnAtrasCliente) btnAtrasCliente.addEventListener('click', () => {
+        show('seccion4-zona');
+    });
+    const btnContinuarCliente = container.querySelector('#btnContinuar_cliente');
+    if (btnContinuarCliente) btnContinuarCliente.addEventListener('click', () => show('seccion6-equipo'));
+    const btnAtrasEquipo = container.querySelector('#btnAtras_equipo');
+    if (btnAtrasEquipo) btnAtrasEquipo.addEventListener('click', () => show('seccion5-cliente'));
+    const btnContinuarEquipo = container.querySelector('#btnContinuar_equipo');
+    if (btnContinuarEquipo) btnContinuarEquipo.addEventListener('click', () => show('seccion7-diagnostico'));
+    const btnAtrasDiag = container.querySelector('#btnAtras_diag');
+    if (btnAtrasDiag) btnAtrasDiag.addEventListener('click', () => show('seccion6-equipo'));
+    const btnContinuarDiag = container.querySelector('#btnContinuar_diag');
+    if (btnContinuarDiag) btnContinuarDiag.addEventListener('click', () => show('seccion8-mantenimiento'));
+    const btnAtrasMantenimiento = container.querySelector('#btnAtras_mantenimiento');
+    if (btnAtrasMantenimiento) btnAtrasMantenimiento.addEventListener('click', () => show('seccion7-diagnostico'));
+    const btnContinuarMantenimiento = container.querySelector('#btnContinuar_mantenimiento');
+    if (btnContinuarMantenimiento && tipoMantenimiento && detalleFreezer) btnContinuarMantenimiento.addEventListener('click', () => {
+        const tipo = tipoMantenimiento.value;
+        if (!tipo) { alert('Seleccione tipo mantenimiento.'); return; }
+        currentPath = tipo; isDescarteTaller = false;
+        Array.from(detalleFreezer.options).forEach(opt => opt.disabled = false);
+        if (tipo === 'YP') { show('seccion12-rep-funcional'); }
+        else if (tipo === 'YA') { show('seccion10-correctivo'); }
+        else if (tipo === 'YM') { show('seccion9-alistamiento'); }
+    });
+    const btnAtrasAlistamiento = container.querySelector('#btnAtras_alistamiento');
+    if (btnAtrasAlistamiento) btnAtrasAlistamiento.addEventListener('click', () => show('seccion8-mantenimiento'));
+    const btnContinuarAlistamiento = container.querySelector('#btnContinuar_alistamiento');
+    if (btnContinuarAlistamiento && detalleAlistamiento && detalleFreezer) btnContinuarAlistamiento.addEventListener('click', () => {
+        const detalle = detalleAlistamiento.value;
+        if (!detalle) { alert('Seleccione detalle alistamiento.'); return; }
+        isDescarteTaller = (detalle === 'DESCARTE TALLER');
+        Array.from(detalleFreezer.options).forEach(opt => {
+            if (isDescarteTaller) { opt.disabled = (opt.value !== 'NO APLICA ( N#A)'); } else { opt.disabled = false; }
+        });
+        if (isDescarteTaller) { detalleFreezer.value = 'NO APLICA ( N#A)'; }
+        else if (detalleFreezer.value === 'NO APLICA ( N#A)') { detalleFreezer.value = ''; }
+        show('seccion11-freezer');
+    });
+    const btnAtrasCorrectivo = container.querySelector('#btnAtras_correctivo');
+    if (btnAtrasCorrectivo) btnAtrasCorrectivo.addEventListener('click', () => show('seccion8-mantenimiento'));
+    const btnSiguienteCorrectivo = container.querySelector('#btnSiguiente_correctivo');
+    if (btnSiguienteCorrectivo && detalleFreezer) btnSiguienteCorrectivo.addEventListener('click', () => {
+        const mttoP = detalleFreezer.querySelector('option[value="MTTO PREVENTIVO"]');
+        const naO = detalleFreezer.querySelector('option[value="NO APLICA ( N#A)"]');
+        if (mttoP) mttoP.disabled = true; if (naO) naO.disabled = true;
+        if (detalleFreezer.value === 'MTTO PREVENTIVO' || detalleFreezer.value === 'NO APLICA ( N#A)') { detalleFreezer.value = ''; }
+        show('seccion11-freezer');
+    });
+    const btnAtrasFreezer = container.querySelector('#btnAtras_freezer');
+    if (btnAtrasFreezer) btnAtrasFreezer.addEventListener('click', () => {
+        if (currentPath === 'YA') show('seccion10-correctivo');
+        else if (currentPath === 'YM') { if (detalleFreezer) Array.from(detalleFreezer.options).forEach(opt => opt.disabled = false); show('seccion9-alistamiento'); }
+        else show('seccion8-mantenimiento');
+    });
+    const btnContinuarFreezer = container.querySelector('#btnContinuar_freezer');
+    if (btnContinuarFreezer && detalleFreezer) btnContinuarFreezer.addEventListener('click', () => {
+        const detalle = detalleFreezer.value;
+        if (!detalle) { alert('Seleccione detalle mantenimiento.'); return; }
+        if (isDescarteTaller) show('seccion14-descripcion'); else show('seccion12-rep-funcional');
+    });
+    const btnAtrasRepFuncional = container.querySelector('#btnAtras_rep_funcional');
+    if (btnAtrasRepFuncional) btnAtrasRepFuncional.addEventListener('click', () => {
+        if (currentPath === 'YP') show('seccion8-mantenimiento'); else show('seccion11-freezer');
+    });
+    const btnSiguienteSec12 = container.querySelector('#btnSiguiente_Sec12');
+    if (btnSiguienteSec12) btnSiguienteSec12.addEventListener('click', () => { show('seccion13-rep-nofuncional'); });
+    const btnAtrasRepNoFuncional = container.querySelector('#btnAtras_rep_nofuncional');
+    if (btnAtrasRepNoFuncional) btnAtrasRepNoFuncional.addEventListener('click', () => { show('seccion12-rep-funcional'); });
+    const btnContinuarSec13 = container.querySelector('#btnContinuar_Sec13');
+    if (btnContinuarSec13) btnContinuarSec13.addEventListener('click', () => { show('seccion14-descripcion'); });
+    const btnAtrasDescripcion = container.querySelector('#btnAtras_descripcion');
+    if (btnAtrasDescripcion) btnAtrasDescripcion.addEventListener('click', () => {
+        if (isDescarteTaller) show('seccion11-freezer'); else show('seccion13-rep-nofuncional');
+    });
+    const btnSiguienteDescripcion = container.querySelector('#btnSiguiente_descripcion');
+    if (btnSiguienteDescripcion) btnSiguienteDescripcion.addEventListener('click', () => { show('seccion15-estado'); });
+    const btnAtrasEstado = container.querySelector('#btnAtras_estado');
+    if (btnAtrasEstado) btnAtrasEstado.addEventListener('click', () => { show('seccion14-descripcion'); });
+    if (estadoReposicion && btnContinuarEstado) {
+        estadoReposicion.addEventListener('change', (event) => { if (btnContinuarEstado) btnContinuarEstado.textContent = 'Siguiente ➡️'; });
+        btnContinuarEstado.addEventListener('click', () => {
+            const repo = estadoReposicion.value; const movEl = container.querySelector('#estadoMovilizacion');
+            const mov = movEl ? movEl.value : ''; if (!mov || !repo) { alert('Seleccione ambos estados.'); return; }
+            if (repo === 'SE SUGIERE REPOSICION DE PRODUCTO') { show('seccion16-inventario'); }
+            else { show('seccion17-firma'); }
+        });
+    }
+
+
+    // (Lógica de Inventario)
+    const btnAtrasInventario = container.querySelector('#btnAtras_inventario');
+    if (btnAtrasInventario) btnAtrasInventario.addEventListener('click', () => { show('seccion15-estado'); });
+    const btnSiguienteInventario = container.querySelector('#btnSiguiente_inventario');
+    if (btnSiguienteInventario) btnSiguienteInventario.addEventListener('click', () => {
+        const resumenContenidoPre = container.querySelector('#resumen_inventario_contenido pre');
+        if (!resumenContenidoPre) {
+            console.error("Error: No se encontró #resumen_inventario_contenido pre.");
+            show('seccion1admin');
+            return;
+        }
+        let resumenTexto = "";
+        let itemsAgregados = 0;
+        const todasLasFilas = container.querySelectorAll('#inventory-table .inventory-row');
+        todasLasFilas.forEach(row => {
+            const qtyInput = row.querySelector('.cantidad-producto');
+            if (!qtyInput) return;
+            const cantidad = parseInt(qtyInput.value, 10) || 0;
+            if (cantidad > 0) {
+                const nombreEl = row.querySelector('.inventory-cell[data-label="PRODUCTO"]');
+                const subtotalEl = row.querySelector('.subtotal-producto');
+                if (nombreEl && subtotalEl) {
+                    resumenTexto += `• ${cantidad} x ${nombreEl.textContent} (Sub: ${subtotalEl.value})\n`;
+                    itemsAgregados++;
+                }
+            }
+        });
+        if (itemsAgregados === 0) { resumenTexto += "No se agregaron productos.\n"; }
+        const subTotalEl = container.querySelector('#grandSubTotal');
+        const itbisEl = container.querySelector('#itbisAmount');
+        const totalEl = container.querySelector('#grandTotalAmount');
+        resumenTexto += "\n----------------------------------\n";
+        resumenTexto += `SUB-TOTAL: ${subTotalEl ? subTotalEl.textContent : formatCurrencyRD(0)}\n`;
+        resumenTexto += `ITBIS (18%): ${itbisEl ? itbisEl.textContent : formatCurrencyRD(0)}\n`;
+        resumenTexto += `TOTAL GENERAL: ${totalEl ? totalEl.textContent : formatCurrencyRD(0)}\n`;
+        resumenContenidoPre.textContent = resumenTexto;
+        show('seccion16_resumen');
+    });
+
+    // (Resumen y Firma)
+    const btnAtrasResumen = container.querySelector('#btnAtras_resumen');
+    if (btnAtrasResumen) btnAtrasResumen.addEventListener('click', () => { show('seccion16-inventario'); });
+    const btnSiguienteResumen = container.querySelector('#btnSiguiente_resumen');
+    if (btnSiguienteResumen) btnSiguienteResumen.addEventListener('click', () => { show('seccion17-firma'); });
+    const btnAtrasFirma = container.querySelector('#btnAtras_firma');
+    if (btnAtrasFirma && estadoReposicion) btnAtrasFirma.addEventListener('click', () => {
+        const repoValue = estadoReposicion.value;
+        if (repoValue === 'SE SUGIERE REPOSICION DE PRODUCTO') { show('seccion16_resumen'); }
+        else { show('seccion15-estado'); }
+    });
+
+    const btnFinalizarFirma = container.querySelector('#btnFinalizar_firma');
+    if (btnFinalizarFirma) btnFinalizarFirma.addEventListener('click', () => {
+        if (!signaturePad || signaturePad.isEmpty()) { alert('Por favor, pida al cliente que firme antes de finalizar.'); return; }
+        btnFinalizarFirma.disabled = true; btnFinalizarFirma.textContent = 'Guardando... ⏳';
+        const datosFormulario = recopilarDatosFormulario();
+        const datosInventario = recopilarDatosInventario();
+        google.script.run
+            .withSuccessHandler(onGuardadoExitoso)
+            .withFailureHandler(onFalloAlGuardar)
+            .guardarDatosCompletos(datosFormulario, datosInventario);
+    });
+
+    // (Buscar Cliente)
+    if (btnBuscarCliente && codigoCliente) btnBuscarCliente.addEventListener('click', () => {
+        const codigo = (codigoCliente.value || '').trim(); if (!codigo) { alert('Ingrese código'); return; }
+        btnBuscarCliente.disabled = true; btnBuscarCliente.textContent = 'Buscando...';
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+            google.script.run
+                .withSuccessHandler(function(datos) {
+                    btnBuscarCliente.disabled = false; btnBuscarCliente.textContent = 'Buscar 🔍';
+                    if (datos) {
+                        const nE = container.querySelector('#nombreEstablecimiento'); if (nE) nE.value = datos.establecimiento || '';
+                        const t = container.querySelector('#telefono'); if (t) t.value = datos.telefono || '';
+                        const v = container.querySelector('#vendedor'); if (v) v.value = datos.vendedor || '';
+                        const s = container.querySelector('#supervisor'); if (s) s.value = datos.supervisor || '';
+                        const p = container.querySelector('#placaFreezer'); if (p) p.value = datos.placa || '';
+                        const m = container.querySelector('#modelo'); if (m) m.value = datos.modelo || '';
+                        
+                        // Guardamos el correo del cliente en el localStorage para usarlo al final
+                        const datosGuardados = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "{}");
+                        datosGuardados.correoCliente = datos.correoCliente || "";
+                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(datosGuardados));
+
+                        // MEJORA: Guardar los datos del cliente buscado
+                        debouncedSave();
+
+                    } else { alert('Código no encontrado.'); }
+                })
+                .withFailureHandler(function(error) {
+                    btnBuscarCliente.disabled = false; btnBuscarCliente.textContent = 'Buscar 🔍';
+                    alert('Error al buscar cliente: ' + error.message);
+                })
+                .obtenerDatosCliente(codigo);
+        } else {
+            console.error("google.script.run no disponible."); alert("Error: No se puede conectar.");
+            btnBuscarCliente.disabled = false; btnBuscarCliente.textContent = 'Buscar 🔍';
+        }
+    });
+
+    // (Lógica de Inputs de Inventario)
+    const cantidadInputs = container.querySelectorAll('#inventory-table .cantidad-producto');
+    cantidadInputs.forEach(input => {
+        // USAR 'input' para que recalcule mientras escribe
+        input.addEventListener('input', (event) => {
+            // Recalcular solo los totales generales
+            calcularTotalesInventario();
+        });
+        input.addEventListener('focus', (event) => {
+            const row = event.target.closest('.inventory-row');
+            if (row) row.classList.add('focused');
+        });
+        input.addEventListener('blur', (event) => {
+            const row = event.target.closest('.inventory-row');
+            if (row) row.classList.remove('focused');
+        });
+    });
+
+
+    // --- Adjuntar listeners para guardado automático ---
+    const formContainer = document.getElementById('form-container');
+    if (formContainer) {
+        // 'input' se dispara inmediatamente para texto y números
+        formContainer.addEventListener('input', (e) => {
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+                // Excluir los buscadores
+                if (target.id !== 'searchRepFuncional' && target.id !== 'searchRepNoFuncional' && target.id !== 'searchInventory') {
+                    debouncedSave();
+                }
+            }
+        });
+        // 'change' se dispara al seleccionar en <select> o marcar/desmarcar checkbox
+        formContainer.addEventListener('change', (e) => {
+            const target = e.target;
+            if (target.tagName === 'SELECT' || target.type === 'checkbox') {
+                debouncedSave();
+            }
+        });
+    }
+} // Fin de attachHandlers
+
+// --- PUNTO DE ENTRADA ---
+renderTemplate();
+
+// --- Listener para el botón de borrar ---
+const clearBtn = document.getElementById('clear-backup-btn');
+if (clearBtn) {
+clearBtn.addEventListener('click', () => {
+if (confirm('¿Está seguro de que desea borrar todo el progreso no enviado? Esta acción no se puede deshacer.')) {
+try {
+localStorage.removeItem(LOCAL_STORAGE_KEY);
+updateSaveStatus('Progreso borrado');
+hideSaveStatus(1500);
+
+// Reiniciar el formulario limpiamente
+renderTemplate();
+
+} catch (e) {
+console.error('Error al borrar backup:', e);
+alert('No se pudo borrar el progreso guardado.');
+}
+}
+});
+} else {
+console.warn('No se encontró #clear-backup-btn');
+}
+
+})();
+</script>
+</body>
+</html>
